@@ -12,20 +12,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import servlet.bean.ProductBean;
 import static common.Config.*;
+import data.dto.CategoryDto;
 
 public class OnlineShoppingServlet extends HttpServlet {
+
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProductDao productDao = new ProductDao();
-        String url = SHOPPING_PAGE; 
+        String url = SHOPPING_PAGE;
         try {
-            List<ProductBean> productBeans = new ArrayList();
-            List<ProductDto> result = productDao.getAll();
-            if (!result.isEmpty()) {
-                for (ProductDto product : result) {
-                    productBeans.add(new ProductBean(product.getId(), product.getName(), product.getDescription(), product.getPrice()));
-                }
-            }
-            req.setAttribute("SHOPPING_PRODUCT", productBeans);
+            List<ProductDto> products = productDao.getAll();
+            List<CategoryDto> categories = productDao.getAllCategories();
+           
+            req.setAttribute("SHOPPING_PRODUCT", products);
+            req.setAttribute("SHOPPING_CATEGORY", categories);
 
         } catch (SQLException ex) {
             ex.printStackTrace();

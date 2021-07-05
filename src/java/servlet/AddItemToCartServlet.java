@@ -15,31 +15,37 @@ import javax.servlet.http.HttpSession;
 import static common.Config.*;
 
 public class AddItemToCartServlet extends HttpServlet {
-    private void processRequest (HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException  {
+
+    private void processRequest(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        String selectedCategories = req.getParameter("cboCategory");
         try {
             HttpSession session = req.getSession(true);
             Cart cart = (Cart) session.getAttribute("CART");
             if (cart == null) {
                 cart = new Cart();
             }
-            String value = req.getParameter ("cboBook");
+            String value = req.getParameter("cboBook");
             log(value);
             cart.addItemToCart(value.split("/")[0], value.split("/")[1]);
             session.setAttribute("CART", cart);
         } finally {
-            res.sendRedirect(getShoppingOnlineUrl());
+            if (selectedCategories == null) {
+                log("Selected null");
+                res.sendRedirect(getShoppingOnlineUrl());
+            } else {
+                res.sendRedirect(getShoppingOnlineUrl() + "&cboCategory=" + selectedCategories);
+            }
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp); 
+        processRequest(req, resp);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         processRequest(req, resp);
     }
-    
-    
+
 }

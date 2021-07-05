@@ -44,7 +44,6 @@ public class Config {
     public static final String CONFIRM_VERIFY_CODE_CONTROLLER = "confirmverifycodeservlet";
 
     public static class Action {
-
         public static final String VERIFY_MAIL_ACTION = "verifiedmail";
         public static final String SEND_VERIFY_CODE_ACTION = "send verify code";
         public static final String CONFIRM_VERIFY_CODE_ACTION = "confirm email";
@@ -71,7 +70,7 @@ public class Config {
     public static String getShoppingOnlineUrl() {
         return DISPATCH_CONTROLLER + "?btAction=" + SHOPPING_ACTION;
     }
-
+    
     public static String getCheckoutUrl() {
         return DISPATCH_CONTROLLER
                 + "?btAction=" + CHECKOUT_ACTION;

@@ -10,12 +10,18 @@ package servlet.sessionmodel;
  * @author dangminhtien
  */
 public class CartItem {
+    private String id;
     private String productName;
     private int quantity;
-
-    public CartItem(String productName, int quantity) {
+    
+    public CartItem(String id, String productName, int quantity) {
+        this.id = id;
         this.productName = productName;
         this.quantity = quantity;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getProductName() {

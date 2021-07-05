@@ -15,6 +15,7 @@ import java.sql.SQLException;
  * @author dangminhtien
  */
 public class OrderDao {
+
     public void add (String productId, int quantity) throws ClassNotFoundException, SQLException {
         try (Connection con = DbHelper.connect()) {
             PreparedStatement insertStatement;

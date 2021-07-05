@@ -48,7 +48,7 @@ public class SendVerifyCodeServlet extends HttpServlet {
                         .add("message", "Your activation code is: " + code)
                         .build();
                 Request sendMailReq = new Request.Builder()
-                        .url("http://localhost:8787/sendmail")
+                        .url("https://mailwithdevlogs.herokuapp.com/sendmail")
                         .addHeader("User-Agent", "OkHttp Bot")
                         .post(formBody)
                         .build();

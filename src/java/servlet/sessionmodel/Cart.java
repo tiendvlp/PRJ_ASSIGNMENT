@@ -23,7 +23,7 @@ public class Cart implements Serializable {
         
         CartItem item = items.get(id);
         if (item == null) {
-            item = new CartItem(productName, 0);
+            item = new CartItem(id, productName, 0);
             this.items.put(id, item);
         }
         item.addQuantity();

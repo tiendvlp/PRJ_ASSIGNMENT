@@ -20,19 +20,18 @@ public class ProcessRequestServlet extends HttpServlet {
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String url = LOGIN_PAGE;
         HttpSession session = req.getSession(true);
-        UserSessionModel user = (UserSessionModel) session.getAttribute(UserSessionModel.SESSION_KEY);
+        UserSessionModel sessionUser = (UserSessionModel) session.getAttribute(UserSessionModel.SESSION_KEY);
         try {
             UserDao userDao = new UserDao();
             BuiltinAuthCookie builtinAuthCookie = new BuiltinAuthCookie();
             GoogleAuthCookie googleAuthCookie = new GoogleAuthCookie();
             boolean buitinParseResult = false;
             boolean ggSignInParseResult = false;
-            if (user != null) {
-                url = SEARCH_PAGE;
-            } else {
+            UserDto userDto = null;
+
+            // if not found user in session let's check cookies
+            if (sessionUser == null) {
                 Cookie[] cookies = req.getCookies();
-                String userPassword;
-                UserDto userDto = null;
                 if (cookies != null) {
                     for (Cookie cookie : cookies) {
                         buitinParseResult = builtinAuthCookie.parseFromCookie(cookie);
@@ -40,9 +39,6 @@ public class ProcessRequestServlet extends HttpServlet {
                             userDto = userDao.getUser(builtinAuthCookie.getEmail(), builtinAuthCookie.getPassword());
                             // if login success then save userName password into session
                             if (userDto != null) {
-                                url = SEARCH_PAGE;
-                                user = new UserSessionModel(userDto.getEmail(), userDto.getFullName(), userDto.getPassword(), userDto.getPhoneNumber(), userDto.getAddress(), userDto.getRole(), UserSessionModel.SIGNIN_METHOD.GOOGLE_SIGNIN);
-                                session.setAttribute(UserSessionModel.SESSION_KEY, user);
                                 break;
                             }
                         }
@@ -51,18 +47,28 @@ public class ProcessRequestServlet extends HttpServlet {
                             GooglePojo googlePojo = googleAuthCookie.getGooglePojo();
                             userDto = userDao.getUser(googlePojo.getEmail());
                             if (userDto != null) {
-                                user = new UserSessionModel(userDto.getEmail(), userDto.getFullName(), userDto.getPassword(), userDto.getPhoneNumber(), userDto.getAddress(), userDto.getRole(), UserSessionModel.SIGNIN_METHOD.GOOGLE_SIGNIN);
-                                url = SEARCH_PAGE;
-                                session.setAttribute(UserSessionModel.SESSION_KEY, user);
                                 break;
                             }
                         }
                     }
                 }
             }
-            // check whether user verified or not
-            if (user != null) {
-                if (!userDao.getVerifiedEmailState(user.getEmail())) {
+
+            if (userDto != null) {
+                // save user into session
+                sessionUser = new UserSessionModel(userDto.getEmail(), userDto.getFullName(), userDto.getPassword(), userDto.getPhoneNumber(), userDto.getAddress(), userDto.getRole(), UserSessionModel.SIGNIN_METHOD.GOOGLE_SIGNIN);
+                session.setAttribute(UserSessionModel.SESSION_KEY, sessionUser);
+            }
+
+            if (sessionUser != null) {
+                // check user role
+                if (sessionUser.getRole().equalsIgnoreCase("user")) {
+                    url = getShoppingOnlineUrl();
+                } else if (sessionUser.getRole().equalsIgnoreCase("admin")) {
+                    url = SEARCH_PAGE;
+                }
+                // check whether email is verified or not
+                if (!userDao.getVerifiedEmailState(sessionUser.getEmail())) {
                     url = getVerifiedMailPageUrl();
                 }
             }

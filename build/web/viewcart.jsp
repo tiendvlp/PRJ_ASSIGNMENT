@@ -24,6 +24,10 @@
             <c:choose>
                 <c:when test="${not empty items}">
                     <form action="dispatchercontroller">
+                        Email: ${User.email} <br>
+                        Phone number: <input name="txtUserPhoneNumber" type="text" value="${User.getPhoneNumber()}"/>  <font color="red">${UERROR.phoneEmpty}</font></br>
+                        Address:  <input name="txtUserAddress"  type="text" style="width: 400px" value="${User.address}"/>  <font color="red">${UERROR.addressEmpty}</font></br>
+                        Fullname: <input name="txtUserFullName" type="text" value="${User.fullName}"/> <font color="red">${UERROR.fullNameEmpty}</font></br>
                         <table border="1">
                             <thead>
                                 <tr>

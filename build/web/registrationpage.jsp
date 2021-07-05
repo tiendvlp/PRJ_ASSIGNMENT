@@ -45,7 +45,6 @@
                     let isValid = false;
                     const form = document.getElementById("registerForm");
                     const error = document.getElementById("error");
-                    console.log("Huhu" + form);
                     form.addEventListener("submit", function (event) {
                         event.preventDefault();
                         const capchaReps = grecaptcha.getResponse();

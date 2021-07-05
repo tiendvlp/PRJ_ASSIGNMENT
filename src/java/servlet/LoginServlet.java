@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
         try {
             UserDto result = accountDao.getUser(txtUserId, txtPassword);
             if (result != null) {
-                url = Config.DISPATCH_CONTROLLER ;
+                url = Config.DISPATCH_CONTROLLER;
                 HttpSession session = req.getSession(true);
                 UserSessionModel user = new UserSessionModel(result.getEmail(), result.getFullName(), result.getPassword(), result.getPhoneNumber(), result.getAddress(), result.getRole(), UserSessionModel.SIGNIN_METHOD.BUILTIN);
                 session.setAttribute(UserSessionModel.SESSION_KEY, user);
