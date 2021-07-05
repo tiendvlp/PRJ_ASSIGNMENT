@@ -10,7 +10,7 @@ package data.dto;
  * @author dangminhtien
  */
 public class OrderDetailDto {
-    enum Status {
+    public enum Status {
         PENDING, SUCCESS, FAILED
     }
     private String id;

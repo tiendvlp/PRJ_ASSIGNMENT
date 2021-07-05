@@ -20,11 +20,9 @@ public class OrderDto {
     private double totalPrice;
     private Date orderDate;
     private boolean paymentStatus;
-    private String productId;
-    private int quantity;
     private List<OrderDetailDto> orders;
     
-    public OrderDto(String id, String userEmail, String address, String phoneNumber, double totalPrice, Date orderDate, boolean paymentStatus, String productId, int quantity, List<OrderDetailDto> orders) {
+    public OrderDto(String id, String userEmail, String address, String phoneNumber, double totalPrice, Date orderDate, boolean paymentStatus, List<OrderDetailDto> orders) {
         this.id = id;
         this.userEmail = userEmail;
         this.address = address;
@@ -32,8 +30,7 @@ public class OrderDto {
         this.totalPrice = totalPrice;
         this.orderDate = orderDate;
         this.paymentStatus = paymentStatus;
-        this.productId = productId;
-        this.quantity = quantity;
+        this.orders = orders;
     }
 
     public List<OrderDetailDto> getOrders() {
@@ -44,13 +41,6 @@ public class OrderDto {
         return id;
     }
 
-    public String getProductId() {
-        return productId;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
 
     public String getUserEmail() {
         return userEmail;

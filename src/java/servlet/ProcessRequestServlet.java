@@ -34,6 +34,7 @@ public class ProcessRequestServlet extends HttpServlet {
                 Cookie[] cookies = req.getCookies();
                 if (cookies != null) {
                     for (Cookie cookie : cookies) {
+                        log("Check cookie");
                         buitinParseResult = builtinAuthCookie.parseFromCookie(cookie);
                         if (buitinParseResult) {
                             userDto = userDao.getUser(builtinAuthCookie.getEmail(), builtinAuthCookie.getPassword());

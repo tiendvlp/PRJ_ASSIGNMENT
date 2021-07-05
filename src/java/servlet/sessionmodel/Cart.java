@@ -14,27 +14,29 @@ import java.util.Map;
  * @author dangminhtien
  */
 public class Cart implements Serializable {
+
     private HashMap<String, CartItem> items = new HashMap();
-    
-    public void addItemToCart (String id, String productName) {
+
+    public void addItemToCart(String id, String productName, int quantity, double price) {
         if (id == null || id.isEmpty()) {
             return;
         }
-        
+
         CartItem item = items.get(id);
         if (item == null) {
-            item = new CartItem(id, productName, 0);
-            this.items.put(id, item);
+            item = new CartItem(id, productName, quantity, price);
+            items.put(id, item);
+        } else {
+            item.addQuantity(quantity);
         }
-        item.addQuantity();
-        
+
     }
-    
-    public Map<String, CartItem> getAll () {
+
+    public Map<String, CartItem> getAll() {
         return this.items;
     }
-    
-    public void removeItem (String id) {
+
+    public void removeItem(String id) {
         if (id == null || id.trim().isEmpty()) {
             return;
         }

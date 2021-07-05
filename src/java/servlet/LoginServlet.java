@@ -54,8 +54,6 @@ public class LoginServlet extends HttpServlet {
         } finally {
             if (errorCode == -1) {
                 resp.sendRedirect(url);
-//                RequestDispatcher dispatcher = req.getRequestDispatcher(url);
-//                dispatcher.forward(req, resp);
                 out.close();
             } else {
                 resp.sendError(errorCode);

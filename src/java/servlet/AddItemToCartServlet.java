@@ -13,27 +13,49 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import static common.Config.*;
+import servlet.error.AddToCartError;
 
 public class AddItemToCartServlet extends HttpServlet {
 
     private void processRequest(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String selectedCategories = req.getParameter("cboCategory");
+        boolean hasError = false;
+        AddToCartError error = null;
         try {
             HttpSession session = req.getSession(true);
             Cart cart = (Cart) session.getAttribute("CART");
             if (cart == null) {
                 cart = new Cart();
             }
-            String value = req.getParameter("cboBook");
-            log(value);
-            cart.addItemToCart(value.split("/")[0], value.split("/")[1]);
+            String txtProductName = req.getParameter("txtProductName");
+            String txtProductId = req.getParameter("txtProductId");
+            String txtQuantity = req.getParameter("txtProductQuantity");
+            String txtPrice = req.getParameter("txtProductPrice");
+
+            error = new AddToCartError(txtProductId);
+
+            int quantity = Integer.parseInt(txtQuantity);
+            double price = Double.parseDouble(txtPrice);
+            cart.addItemToCart(txtProductId, txtProductName, quantity, price);
             session.setAttribute("CART", cart);
+            
+        } catch (NumberFormatException ex) {
+            hasError = true;
+            error.setIncorectQuantity();
         } finally {
-            if (selectedCategories == null) {
-                log("Selected null");
-                res.sendRedirect(getShoppingOnlineUrl());
+            if (hasError) {
+                log("Co loi nha");
+                req.setAttribute("UERROR", error);
+                if (selectedCategories != null) {
+                    req.setAttribute("cboCategory", selectedCategories);
+                }
+                req.getRequestDispatcher(getShoppingOnlineUrl()).forward(req, res);
             } else {
-                res.sendRedirect(getShoppingOnlineUrl() + "&cboCategory=" + selectedCategories);
+                if (selectedCategories == null) {
+                    res.sendRedirect(getShoppingOnlineUrl());
+                } else {
+                    res.sendRedirect(getShoppingOnlineUrl() + "&cboCategory=" + selectedCategories);
+                }
             }
         }
     }

@@ -12,12 +12,18 @@ package servlet.sessionmodel;
 public class CartItem {
     private String id;
     private String productName;
+    private double price;
     private int quantity;
     
-    public CartItem(String id, String productName, int quantity) {
+    public CartItem(String id, String productName, int quantity, double price) {
         this.id = id;
         this.productName = productName;
+        this.price = price;
         this.quantity = quantity;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public String getId() {
@@ -32,7 +38,7 @@ public class CartItem {
         return quantity;
     }
     
-    public void addQuantity () {
-        quantity += 1;
+    public void addQuantity (int quantity) {
+        this.quantity += quantity;
     }
 }
