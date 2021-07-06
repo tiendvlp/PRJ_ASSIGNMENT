@@ -21,6 +21,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import static common.Config.*;
+import sendmail.ConfirmAccountEmail;
+import sendmail.Email;
+import sendmail.MailSenderApi;
 import servlet.sessionmodel.UserSessionModel;
 
 /**
@@ -41,19 +44,9 @@ public class SendVerifyCodeServlet extends HttpServlet {
                 String emailToVerify = user.getEmail();
                 String uuid = UUID.randomUUID().toString();
                 String code = uuid.substring(uuid.length() - 5, uuid.length() - 1);
-                
-                RequestBody formBody = new FormBody.Builder()
-                        .add("to", emailToVerify)
-                        .add("subject", "VERIFIED EMAIL")
-                        .add("message", "Your activation code is: " + code)
-                        .build();
-                Request sendMailReq = new Request.Builder()
-                        .url("https://mailwithdevlogs.herokuapp.com/sendmail")
-                        .addHeader("User-Agent", "OkHttp Bot")
-                        .post(formBody)
-                        .build();
-
-                Response sendMailResp = httpClient.newCall(sendMailReq).execute();
+                Email confirmEmail = new ConfirmAccountEmail(code, emailToVerify);
+                MailSenderApi mailSender = new MailSenderApi();
+                Response sendMailResp =  mailSender.send(confirmEmail);
                 if (sendMailResp.isSuccessful()) {
                     url = getVerifiedMailPageUrl();
                     log("Send email result: " + sendMailResp.body().string());

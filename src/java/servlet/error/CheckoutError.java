@@ -13,6 +13,7 @@ public class CheckoutError implements PresentableError {
     private String fullNameEmpty = null;
     private String addressEmpty = null;
     private String phoneEmpty = null;
+    private String phoneInvalid = null;
 
     public String getFullNameEmpty() {
         return fullNameEmpty;
@@ -34,6 +35,13 @@ public class CheckoutError implements PresentableError {
         this.addressEmpty = "Address can not be empty";
     }
 
+    public void setPhoneInvalid() {
+        this.phoneInvalid = "Invalid phone number";
+    }
+    public String getPhoneInvalid() {
+        return phoneInvalid;
+    }
+    
     public void setPhoneEmpty() {
         this.phoneEmpty = "Phone can not be empty";
     }

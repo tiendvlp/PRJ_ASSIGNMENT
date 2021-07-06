@@ -10,9 +10,11 @@ import data.dao.OrderDao;
 import data.dto.OrderDetailDto;
 import data.dto.OrderDto;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +27,9 @@ import servlet.error.errorvalidator.CheckoutReqHandler;
 import servlet.sessionmodel.Cart;
 import servlet.sessionmodel.CartItem;
 import java.util.UUID;
+import sendmail.CheckoutEmail;
+import sendmail.CheckoutEmail.OrderConfirm;
+import sendmail.MailSenderApi;
 
 /**
  *
@@ -35,7 +40,7 @@ public class CheckoutServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         CheckoutReqHandler reqHandler = new CheckoutReqHandler();
         reqHandler.init(req);
-
+        String htmlSuccessRes="<h1>Thank you for your order</h1></br>";
         try {
             if (!reqHandler.hasError()) {
                 OrderDao orderDao = new OrderDao();
@@ -46,6 +51,9 @@ public class CheckoutServlet extends HttpServlet {
                     double totalOrderPrice = 0d;
                     String orderId = UUID.randomUUID().toString();
                     ArrayList<OrderDetailDto> orderDetails = new ArrayList();
+
+                    List<OrderConfirm> ordersMail = new ArrayList();
+
                     if (cart != null) {
                         Map<String, CartItem> items = cart.getAll();
                         if (!items.isEmpty()) {
@@ -53,12 +61,21 @@ public class CheckoutServlet extends HttpServlet {
                                 totalOrderPrice += item.getPrice() * item.getQuantity();
                                 String orderDetailId = UUID.randomUUID().toString();
                                 orderDetails.add(new OrderDetailDto(orderDetailId, orderId, item.getQuantity(), item.getId(), item.getPrice() * item.getQuantity(), OrderDetailDto.Status.PENDING));
+
+                                ordersMail.add(new OrderConfirm(item.getProductName(), item.getPrice(), item.getQuantity()));
                             }
                         }
                         session.removeAttribute("CART");
+                        
+                        CheckoutEmail mail = new CheckoutEmail(ordersMail,totalOrderPrice, reqHandler.getTxtEmail());
+                        MailSenderApi sendMail = new MailSenderApi();
+                        htmlSuccessRes = mail.getHtml();
+                        sendMail.send(mail);
                     }
+
                     OrderDto orderDto = new OrderDto(orderId, reqHandler.getTxtEmail(), reqHandler.getTxtAddress(), reqHandler.getTxtPhoneNumber(), totalOrderPrice, new Date(System.currentTimeMillis()), true, orderDetails);
                     orderDao.add(orderDto);
+
                 }
             }
         } catch (ClassNotFoundException ex) {
@@ -70,7 +87,10 @@ public class CheckoutServlet extends HttpServlet {
                 req.setAttribute("UERROR", reqHandler.getError());
                 req.getRequestDispatcher(getViewCartUrl()).forward(req, res);
             } else {
-                // success
+                // forward to success page
+                PrintWriter printer = res.getWriter();
+                htmlSuccessRes += "</br>" + "<a href=\"dispatchercontroller\">back</a>"; 
+                printer.print(htmlSuccessRes);
             }
         }
     }

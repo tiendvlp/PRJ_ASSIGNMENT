@@ -9,6 +9,7 @@
 <%@page import="java.util.Map"%>
 <%@page import="servlet.sessionmodel.Cart"%>
 <%@page import="common.Config"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,13 +20,13 @@
     <body>
         <h1>Your cart:</h1>
         <c:set var="cart" value="${CART}"></c:set>
-        <c:if test="${cart != null}">
-            <c:set var="items" value = "${cart.getAll()}"></c:set>
             <c:choose>
-                <c:when test="${not empty items}">
-                    <form action="dispatchercontroller">
-                        Email: ${User.email} <br>
-                        Phone number: <input name="txtUserPhoneNumber" type="text" value="${User.getPhoneNumber()}"/>  <font color="red">${UERROR.phoneEmpty}</font></br>
+                <c:when test="${ not empty cart and not empty cart.getAll() and fn:length(cart.getAll()) > 0}">
+                    <c:set var="items" value = "${cart.getAll()}"></c:set>
+                        <form action="dispatchercontroller">
+                            Email: ${User.email} <br>
+                        <input name="txtUserEmail" type="text" value="${User.getEmail()}"/>
+                        Phone number: <input name="txtUserPhoneNumber" type="text" value="${User.getPhoneNumber()}"/>  <font color="red">${UERROR.phoneEmpty}, ${UERROR.phoneInvalid}</font></br>
                         Address:  <input name="txtUserAddress"  type="text" style="width: 400px" value="${User.address}"/>  <font color="red">${UERROR.addressEmpty}</font></br>
                         Fullname: <input name="txtUserFullName" type="text" value="${User.fullName}"/> <font color="red">${UERROR.fullNameEmpty}</font></br>
                         <table border="1">
@@ -65,6 +66,5 @@
                     <a href=${Config.getShoppingOnlineUrl()}>Shopping More</a>
                 </c:otherwise>
             </c:choose>
-        </c:if>
     </body>
 </html>

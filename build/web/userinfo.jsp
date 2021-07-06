@@ -40,7 +40,7 @@
             <input type="hidden" name="txtRawUserEmail" value="${User.email}">
             <input type="submit" name="btAction" value="SignOut">
             <input type="hidden" name="txtSignInMethod" value="${User.signInMethod}"/>
-            <a href="${Config.getFullSearchUrl("")}">Back to search</a>
+            <a href="dispatchercontroller">Back</a>
         </form>
     </body>
 </html>

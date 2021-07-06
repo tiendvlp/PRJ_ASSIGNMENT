@@ -13,6 +13,7 @@ import servlet.error.CheckoutError;
  * @author dangminhtien
  */
 public class CheckoutReqHandler implements RequestValidator {
+
     private String txtEmail;
     private String txtFullName;
     private String txtAddress;
@@ -35,9 +36,13 @@ public class CheckoutReqHandler implements RequestValidator {
             hasError = true;
             error.setAddressEmpty();
         }
+
         if (txtPhoneNumber.trim().isEmpty()) {
             hasError = true;
             error.setPhoneEmpty();
+        } else if (!ValidatorUtils.validatePhoneNumber(txtPhoneNumber)) {
+            hasError = true;
+            error.setPhoneInvalid();
         }
         return hasError;
     }

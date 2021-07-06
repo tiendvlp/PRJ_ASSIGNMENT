@@ -152,10 +152,16 @@ public class UserDao {
     }
 
     public boolean deleteUser(String userEmail) throws ClassNotFoundException, SQLException {
+
         int effectedRow = 0;
         try (Connection con = DbHelper.connect()) {
-            PreparedStatement deleteStatement = con.prepareStatement("DELETE FROM USERS WHERE EMAIL = ?");
+            PreparedStatement deleteStatement = con.prepareStatement(
+                    "alter table orders drop CONSTRAINT ORDER_USERS "
+                    + "alter table orders add CONSTRAINT ORDER_USERS FOREIGN key (USEREMAIL) REFERENCES USERS(EMAIL) "
+                    + "delete orders where useremail = ? "
+                    + "DELETE FROM USERS WHERE EMAIL = ?");
             deleteStatement.setString(1, userEmail);
+            deleteStatement.setString(2, userEmail);
             effectedRow = deleteStatement.executeUpdate();
         }
         return effectedRow > 0;

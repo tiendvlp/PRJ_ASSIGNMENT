@@ -69,7 +69,7 @@
                                 <td>
                                     <c:choose>
                                         <c:when test="${rowUser.signInMethod eq 'GOOGLE_SIGNIN'}">
-                                            Google signin
+                                            NO_NEED_PASSWORD
                                         </c:when>
                                         <c:otherwise>
                                             <input type="text" name="txtUserPassword" value="${rowUser.getPassword()}" />
@@ -99,13 +99,12 @@
                                 </td>   
                                 <td>
                                     <select name="ddlist">
+                                        <option value="${rowUser.getRole()}">${rowUser.getRole()}</option>
                                         <c:choose>
                                             <c:when test="${rowUser.getRole() eq 'ADMIN'}">
-                                                <option value="Admin">Admin</option>
                                                 <option value="User">User</option>
                                             </c:when>
                                             <c:otherwise>
-                                                <option value="User">User</option>
                                                 <option value="Admin">Admin</option>
                                             </c:otherwise>
                                         </c:choose>

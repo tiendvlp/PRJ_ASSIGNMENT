@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute(UserSessionModel.SESSION_KEY, user);
                 BuiltinAuthCookie authCookie = new BuiltinAuthCookie(result.getEmail(), result.getPassword());
                 Cookie cookie = authCookie.getCookie();
-                cookie.setMaxAge(60 * 3);
+                cookie.setMaxAge(60 * 60);
                 resp.addCookie(cookie);
                 if (!result.isIsVerified()) {
                     url = Config.getVerifiedMailPageUrl();

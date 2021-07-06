@@ -9,6 +9,7 @@
 <%@page import="data.dto.UserDto"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="data.dao.ProductDao"%>
+<%@page import="common.Config"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -20,7 +21,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h1>Book Store</h1>
+        <h1>Book Store</h1> 
+        <a href="${Config.getSignOutUrl()}">SignOut</a>
+        <c:url value="dispatchercontroller" var="viewUserInfoUrl">
+            <c:param name="btAction" value="viewuserinfo"></c:param>
+        </c:url>
+        <a href="${viewUserInfoUrl}">UserInfo</a>
         <c:set var="selectedCategory" value="${param.cboCategory}"/>
         <c:set var="categories" value="${requestScope.SHOPPING_CATEGORY}"/>
         <c:set var="products" value="${requestScope.SHOPPING_PRODUCT}"/>

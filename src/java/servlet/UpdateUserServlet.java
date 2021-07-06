@@ -20,7 +20,6 @@ import servlet.cookie.BuiltinAuthCookie;
 import servlet.error.UpdateUserError;
 import servlet.error.errorvalidator.UpdateReqHandler;
 import servlet.sessionmodel.UserSessionModel;
-import static servlet.sessionmodel.UserSessionModel.SIGNIN_METHOD.GOOGLE_SIGNIN;
 
 /**
  *
@@ -67,11 +66,7 @@ public class UpdateUserServlet extends HttpServlet {
             if (hasError) {
                 errorIndex = reqHandler.getTxtRawEmail();
             } else {
-                String signInMethod = "BUILTIN";
-                if (userSessionModel.getSignInMethod() == GOOGLE_SIGNIN) {
-                    signInMethod = "GOOGLE_SIGNIN";
-                }
-                UserDto userDto = new UserDto(reqHandler.getTxtEmail(), true,signInMethod, reqHandler.getTxtFullName(), reqHandler.getTxtPassword(), reqHandler.getTxtPhoneNumber(), reqHandler.getTxtAddress(), userRole);
+                UserDto userDto = new UserDto(reqHandler.getTxtEmail(), true,reqHandler.getTxtSignInMethod(), reqHandler.getTxtFullName(), reqHandler.getTxtPassword(), reqHandler.getTxtPhoneNumber(), reqHandler.getTxtAddress(), userRole);
                 UserDto updatedUser = dao.updateUser(reqHandler.getTxtRawEmail(), userDto);
                 // if update current account
                 if (reqHandler.getTxtRawEmail().equals(currentUserEmail)) {
