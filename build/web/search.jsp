@@ -20,16 +20,18 @@
     <body>
         <c:set var="currentUser" value="${User}"></c:set>
         <font color="red"> Welcome ${currentUser.getFullName()} </font> 
-        <a href="${Config.getSignOutUrl()}">SignOut</a>
-
         <h1>Search Page JSP</h1> 
-        <c:url value="dispatchercontroller" var="viewUserInfoUrl">
-            <c:param name="btAction" value="viewuserinfo"></c:param>
-        </c:url>
-        <a href="${viewUserInfoUrl}">UserInfo</a>
-        <c:set var="searchValue" value="${param.txtSearch}"/>
 
-        <form method="GET" action="dispatchercontroller">
+        <form method="GET" action="${Config.SEARCH_PAGE}">
+            <input type="submit" value ="User Info" name="btAction"/>
+        </form> <br/>
+
+        <a href="${Config.SIGNOUT_CONTROLLER}">SignOut</a>
+
+        <c:set var="searchValue" value="${param.txtSearch}"/>
+        <c:set var = "userId" value="${true}" scope="request"/>
+
+        <form method="GET" action="${Config.SEARCH_PAGE}">
             Search 
             <input type="text" name="txtSearch" value="${searchValue}"><br/>
             <input type="submit" value ="Search" name="btAction"/>
@@ -51,17 +53,19 @@
                             <th>Signin Method</th>
                             <th>Delete</th>
                             <th>Update</th>
+                            <th>Edit</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach items="${results}" var="rowUser" varStatus="status">
-                        <form action="dispatchercontroller">
+                        <form action="${Config.SEARCH_PAGE}">
                             <tr>
                                 <td>
                                     ${status.count}
                                 </td>
                                 <td>
-                                    <input type="text" name="txtUserEmail" value="${rowUser.getEmail()}" />
+                                    ${rowUser.getEmail()}
+                                    <input type="hidden" name="txtUserEmail" value="${rowUser.getEmail()}" />
                                     <c:if test="${UERROR_INDEX eq rowUser.email}">
                                         <br/>  <font color="red"> ${UERROR.emailEmpty}, ${UERROR.emailDuplicate} </font 
                                     </c:if>
@@ -120,16 +124,18 @@
                                             Can not delete yourself
                                         </c:when>
                                         <c:otherwise>
-                                            <a href="${Config.getFullDeleteUrl(rowUser.getEmail(), searchValue)}">Delete</a></td>
+                                            <input type="submit" value="Delete" name="btAction" />
                                         </c:otherwise>
                                     </c:choose>
                                 <td>
                                     <input type="submit" value="Update" name="btAction" />
-                                    <input type="hidden" value="${rowUser.signInMethod}" name="txtSignInMethod"/>
-                                    <input type="hidden" value="${searchValue}" name="txtLastSearchValue"/>
-                                    <input type="hidden" value="${rowUser.getEmail()}" name="txtRawUserEmail"/>
+                                </td>
+                                <td>
+                                    <input type="submit" value="Edit" name="btAction"/>
                                 </td>
                             </tr>
+                            <input type="hidden" value="${searchValue}" name="txtLastSearchValue"/>
+                            <input type="hidden" value="${rowUser.signInMethod}" name="txtSignInMethod"/>
                         </form>
                     </c:forEach>
                 </tbody>

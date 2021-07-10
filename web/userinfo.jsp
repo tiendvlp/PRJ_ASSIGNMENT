@@ -15,7 +15,15 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="dispatchercontroller">
+        <c:choose>
+            <c:when test="${ not empty SelectedUser.getEditedValue()}">
+                <c:set var="User" value="${SelectedUser.getEditedValue()}"></c:set>
+            </c:when>
+            <c:otherwise>
+                <c:set var="User" value="${SelectedUser.getOriginalValue()}"></c:set>
+            </c:otherwise>
+        </c:choose>
+        <form action="${Config.USER_INFO_PAGE}">
             <c:choose>
                 <c:when test="${User.signInMethod eq 'GOOGLE_SIGNIN'}">
                     Email: ${User.email} <br>
@@ -29,18 +37,32 @@
             Phone number: <input name="txtUserPhoneNumber" type="text" value="${User.getPhoneNumber()}"/>  <font color="red">${UERROR.phoneEmpty}</font></br>
             Address:  <input name="txtUserAddress"  type="text" style="width: 400px" value="${User.address}"/>  <font color="red">${UERROR.addressEmpty}</font></br>
             Fullname: <input name="txtUserFullName" type="text" value="${User.fullName}"/> <font color="red">${UERROR.fullNameEmpty}</font></br>
-            <c:if test="${User.role eq 'ADMIN'}">
+            <c:if test="${sessionScope.User.role eq 'ADMIN'}">
                 Current role: <select name="ddlist">
-                    <option value="ADMIN">Admin</option>
-                    <option value="USER">User</option>
+                    <option value="${User.role}">${User.role}</option>
+                    <c:choose>
+                        <c:when test="${User.role eq 'ADMIN'}">
+                            <option value="USER">USER</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="ADMIN">ADMIN</option>
+                        </c:otherwise>
+                    </c:choose>
                 </select>    
                 </br>     
             </c:if>
             <input type="submit" name="btAction" value="Update">     
             <input type="hidden" name="txtRawUserEmail" value="${User.email}">
-            <input type="submit" name="btAction" value="SignOut">
             <input type="hidden" name="txtSignInMethod" value="${User.signInMethod}"/>
-            <a href="dispatchercontroller">Back</a>
         </form>
+        <c:choose>
+            <c:when test="${sessionScope.User.getRole() eq 'ADMIN'}">
+                <a href="Search?btAction=Search&txtSearch=${LAST_SEARCH_VALUE}"><button>back</button></a>
+            </c:when>
+            <c:otherwise>
+                <a href="processrequestservlet"><button>back</button></a>
+            </c:otherwise>
+        </c:choose>
+        <a href="${Config.USER_INFO_PAGE}">Reset</a>
     </body>
 </html>

@@ -15,7 +15,8 @@
     </head>
     <body>
         <h1>Register</h1>
-        <form action="dispatchercontroller" id="registerForm">
+        <c:set var="USER" value="${User}"></c:set>
+        <form action="${Config.CREATE_ACCOUNT_CONTROLLER}" id="registerForm">
             <c:choose>
                 <c:when test="${USER.signInMethod eq 'GOOGLE_SIGNIN'}">
                     ${USER.email}

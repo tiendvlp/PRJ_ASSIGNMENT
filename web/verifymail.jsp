@@ -15,11 +15,14 @@
     </head>
     <body>
         <h1>Verify Your account</h1>
-        <form action="dispatchercontroller">
+        <form action="${Config.CONFIRM_EMAIL_CONTROLLER}">
             <input type="text" name="txtInputCode" value="" />
-            <input type="submit" name="btAction" value="send verify code"/> <br/>
-            <input type="submit" name="btAction" value="confirm email"/>
-                    <a href="${Config.getSignOutUrl()}">SignOut</a>
+            <a href="${Config.SEND_VERIFIED_CONTROLLER}">send verify code</a> <br/>
+            <c:if test="${not empty UERROR}">
+                <font color="red">${UERROR}</font> </br>
+            </c:if>
+            <input type="submit" name="btAction" value="Confirm email">
+            <a href="${Config.SIGNOUT_CONTROLLER}">SignOut</a>
         </form>
     </body>
 </html>

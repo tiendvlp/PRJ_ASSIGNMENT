@@ -10,14 +10,13 @@ import data.dto.CategoryDto;
 import data.dto.ProductDto;
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import data.dto.*;
 import java.sql.PreparedStatement;
+
 /**
  *
  * @author dangminhtien
@@ -63,6 +62,17 @@ public class ProductDao {
             }
         }
         return result;
+    }
+
+    public int getQuantity(String productId) throws ClassNotFoundException, SQLException {
+        int quantity = 0;
+        try (Connection con = DbHelper.connect()) {
+            PreparedStatement queryStatement = con.prepareStatement("SELECT QUANTITY FROM PRODUCT WHERE ID = ?");
+            queryStatement.setString(1, productId);
+            ResultSet dbResults = queryStatement.executeQuery();
+            quantity = dbResults.getInt("QUANTITY");
+        }
+        return quantity;
     }
 
     public List<ProductDto> getAll() throws ClassNotFoundException, SQLException {

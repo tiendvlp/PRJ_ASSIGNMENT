@@ -16,5 +16,5 @@
         <h1>Check your email to see your order detail</h1> <br>
     </body>
     
-    <a href="dispatchercontroller">back</a>
+    <a href="/">back</a>
 </html>

@@ -1,5 +1,6 @@
 package servlet;
 
+import servlet.login.GooglePojo;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,9 +12,9 @@ import data.dto.UserDto;
 import java.sql.SQLException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
-import servlet.cookie.BuiltinAuthCookie;
-import servlet.cookie.GoogleAuthCookie;
-import servlet.sessionmodel.UserSessionModel;
+import servlet.common.cookie.BuiltinAuthCookie;
+import servlet.common.cookie.GoogleAuthCookie;
+import servlet.common.sessionmodel.UserSessionModel;
 
 public class ProcessRequestServlet extends HttpServlet {
 
@@ -64,13 +65,16 @@ public class ProcessRequestServlet extends HttpServlet {
             if (sessionUser != null) {
                 // check user role
                 if (sessionUser.getRole().equalsIgnoreCase("user")) {
-                    url = getShoppingOnlineUrl();
+                    log("Shopping nha");
+                    url = SHOPPING_PAGE;
                 } else if (sessionUser.getRole().equalsIgnoreCase("admin")) {
+                    log("Search nha");
                     url = SEARCH_PAGE;
                 }
                 // check whether email is verified or not
                 if (!userDao.getVerifiedEmailState(sessionUser.getEmail())) {
-                    url = getVerifiedMailPageUrl();
+                    log("Verified nha");
+                    url = "VerifiedEmail";
                 }
             }
 
@@ -79,7 +83,8 @@ public class ProcessRequestServlet extends HttpServlet {
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         } finally {
-            req.getRequestDispatcher(url).forward(req, resp);
+            log("URL la: " + url);
+            resp.sendRedirect(url);
         }
     }
 

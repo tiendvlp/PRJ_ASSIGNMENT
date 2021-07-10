@@ -5,9 +5,9 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="servlet.sessionmodel.CartItem"%>
+<%@page import="servlet.common.sessionmodel.CartItem"%>
 <%@page import="java.util.Map"%>
-<%@page import="servlet.sessionmodel.Cart"%>
+<%@page import="servlet.common.sessionmodel.Cart"%>
 <%@page import="common.Config"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -23,7 +23,7 @@
             <c:choose>
                 <c:when test="${ not empty cart and not empty cart.getAll() and fn:length(cart.getAll()) > 0}">
                     <c:set var="items" value = "${cart.getAll()}"></c:set>
-                        <form action="dispatchercontroller">
+                        <form action="${Config.VIEW_CART_PAGE}">
                             Email: ${User.email} <br>
                         <input name="txtUserEmail" type="text" value="${User.getEmail()}"/>
                         Phone number: <input name="txtUserPhoneNumber" type="text" value="${User.getPhoneNumber()}"/>  <font color="red">${UERROR.phoneEmpty}, ${UERROR.phoneInvalid}</font></br>
@@ -50,7 +50,7 @@
                             </c:forEach>
                             <tr>
                                 <td colspan="3">
-                                    <a href="${Config.getShoppingOnlineUrl()}">Shopping More</a>
+                                    <a href="${Config.SHOPPING_PAGE}">Shopping More</a>
                                 </td>
                                 <td>
                                     <input type="submit" value="Remove Selected Items" name="btAction" />
@@ -63,7 +63,7 @@
                 </c:when>
                 <c:otherwise>
                     <h2>No cart</h2> 
-                    <a href=${Config.getShoppingOnlineUrl()}>Shopping More</a>
+                    <a href="${Config.SHOPPING_PAGE}">Shopping More</a>
                 </c:otherwise>
             </c:choose>
     </body>

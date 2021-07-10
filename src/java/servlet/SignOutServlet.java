@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import servlet.cookie.GoogleAuthCookie;
-import servlet.sessionmodel.UserSessionModel;
+import servlet.common.cookie.GoogleAuthCookie;
+import servlet.common.sessionmodel.UserSessionModel;
 
 public class SignOutServlet extends HttpServlet {
 

@@ -1,0 +1,34 @@
+{   
+    "defaultUrl": "processrequestservlet",
+    "roadMap": {
+        "Search": "search",
+        "ShoppingOnline": "shoppingdispatcher",
+        "VerifiedEmail": "verifymail.jsp",
+        "Register": "registrationpage.jsp",
+        "CheckoutSuccess": "checkoutsuccess.jsp",
+        "ConfirmUpdate": "confirmupdate.jsp",
+        "UserInfo": "userinfodispatcher",
+        "ViewYourCart": "cartdispatcher",
+
+        "DeleteController": "deleteservlet",
+        "GetShoppingProductController": "loadshoppingproductservlet",
+        "SignOutController": "signoutservlet",
+        "RemoveSelectedItemsController": "removecartitemservlet",
+        "AddItemToCartController": "additemtocartservlet",
+        "ConfirmEmailController": "confirmverifycodeservlet",
+        "LoginController": "loginservlet",
+        "logingoogle": "logingoogle",
+        "CreateAccountController": "createaccountservlet",
+        "UpdateController": "updateservlet",
+        "CheckoutController": "checkoutservlet",
+        "SearchLastNameController": "searchlastnameservlet",
+        "SendVerifyCodeController": "sendverifycodeservlet",
+
+        "ShoppingPage": "onlineshopping.jsp",
+        "SearchPage": "search.jsp",
+        "LoginPage": "login.jsp",
+        "RegisterPage": "registrationpage.jsp",
+        "UserInfoPage": "userinfo.jsp",
+        "ViewYourCartUI": "viewcart.jsp"
+    }
+}

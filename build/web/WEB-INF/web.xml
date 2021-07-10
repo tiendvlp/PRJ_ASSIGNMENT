@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+    <listener>
+        <description>ServletContextListener</description>
+        <listener-class>contextlistener.MyApplicationListener</listener-class>
+    </listener>
     <servlet>
         <servlet-name>loginservlet</servlet-name>
-        <servlet-class>servlet.LoginServlet</servlet-class>
+        <servlet-class>servlet.login.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>loginservlet</servlet-name>
@@ -10,7 +14,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>deleteservlet</servlet-name>
-        <servlet-class>servlet.DeleteUserServlet</servlet-class>
+        <servlet-class>servlet.search.DeleteUserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>deleteservlet</servlet-name>
@@ -26,19 +30,11 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>searchlastnameservlet</servlet-name>
-        <servlet-class>servlet.SearchLastnameServlet</servlet-class>
+        <servlet-class>servlet.search.SearchLastnameServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>searchlastnameservlet</servlet-name>
         <url-pattern>/searchlastnameservlet</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>dispatchercontroller</servlet-name>
-        <servlet-class>servlet.DispatcherController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>dispatchercontroller</servlet-name>
-        <url-pattern>/dispatchercontroller</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>signoutservlet</servlet-name>
@@ -50,15 +46,23 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>additemtocartservlet</servlet-name>
-        <servlet-class>servlet.AddItemToCartServlet</servlet-class>
+        <servlet-class>servlet.shopping.AddItemToCartServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>additemtocartservlet</servlet-name>
         <url-pattern>/additemtocartservlet</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>adminupdateuser</servlet-name>
+        <servlet-class>servlet.admin_edituser.AdminUpdateUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>adminupdateuser</servlet-name>
+        <url-pattern>/adminupdateuser</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>updateservlet</servlet-name>
-        <servlet-class>servlet.UpdateUserServlet</servlet-class>
+        <servlet-class>servlet.userinfo.UpdateUserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>updateservlet</servlet-name>
@@ -66,7 +70,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>removecartitemservlet</servlet-name>
-        <servlet-class>servlet.RemoveItemFromCartServlet</servlet-class>
+        <servlet-class>servlet.cart.RemoveItemFromCartServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>removecartitemservlet</servlet-name>
@@ -74,23 +78,23 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>checkoutservlet</servlet-name>
-        <servlet-class>servlet.CheckoutServlet</servlet-class>
+        <servlet-class>servlet.cart.CheckoutServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>checkoutservlet</servlet-name>
         <url-pattern>/checkoutservlet</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>onlineshopping</servlet-name>
-        <servlet-class>servlet.OnlineShoppingServlet</servlet-class>
+        <servlet-name>loadshoppingproductservlet</servlet-name>
+        <servlet-class>servlet.shopping.LoadShoppingProductServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>onlineshopping</servlet-name>
-        <url-pattern>/onlineshopping</url-pattern>
+        <servlet-name>loadshoppingproductservlet</servlet-name>
+        <url-pattern>/loadshoppingproductservlet</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>createaccountservlet</servlet-name>
-        <servlet-class>servlet.CreateAccountServlet</servlet-class>
+        <servlet-class>servlet.register.CreateAccountServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>createaccountservlet</servlet-name>
@@ -102,19 +106,43 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>sendverifycodeservlet</servlet-name>
-        <servlet-class>servlet.SendVerifyCodeServlet</servlet-class>
-    </servlet>   
+        <servlet-class>servlet.register.SendVerifyCodeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>cartdispatcher</servlet-name>
+        <url-pattern>/cartdispatcher</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>cartdispatcher</servlet-name>
+        <servlet-class>servlet.cart.CartDispatcher</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>confirmverifycodeservlet</servlet-name>
-        <servlet-class>servlet.ConfirmVerifyCodeServlet</servlet-class>
+        <servlet-class>servlet.register.ConfirmVerifyCodeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>confirmverifycodeservlet</servlet-name>
         <url-pattern>/confirmverifycodeservlet</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>shoppingdispatcher</servlet-name>
+        <servlet-class>servlet.shopping.ShoppingDispatcher</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>shoppingdispatcher</servlet-name>
+        <url-pattern>/shoppingdispatcher</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>userinfodispatcher</servlet-name>
+        <servlet-class>servlet.userinfo.UserInfoDispatcher</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userinfodispatcher</servlet-name>
+        <url-pattern>/userinfodispatcher</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>logingoogleservlet</servlet-name>
-        <servlet-class>servlet.LoginGoogleServlet</servlet-class>
+        <servlet-class>servlet.login.LoginGoogleServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>logingoogleservlet</servlet-name>
@@ -136,6 +164,22 @@
         <!-- /src/main/webapp/error-404.html-->
     </error-page>
     <welcome-file-list>
-        <welcome-file>dispatchercontroller</welcome-file>
+        <welcome-file>processrequestservlet</welcome-file>
     </welcome-file-list>
+    <filter>
+        <filter-name>UpdateUserReqValidationFilter</filter-name>
+        <filter-class>filter.UpdateUserReqValidationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UpdateUserReqValidationFilter</filter-name>
+        <url-pattern>/UpdateController</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>DispatchFilter</filter-name>
+        <filter-class>filter.DispatchFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>DispatchFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>

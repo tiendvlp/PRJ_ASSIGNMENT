@@ -9,8 +9,8 @@
 <%@page import="data.dto.UserDto"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="data.dao.ProductDao"%>
-<%@page import="common.Config"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="common.Config"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -22,11 +22,23 @@
     </head>
     <body>
         <h1>Book Store</h1> 
-        <a href="${Config.getSignOutUrl()}">SignOut</a>
-        <c:url value="dispatchercontroller" var="viewUserInfoUrl">
-            <c:param name="btAction" value="viewuserinfo"></c:param>
-        </c:url>
-        <a href="${viewUserInfoUrl}">UserInfo</a>
+        <c:choose>
+            <c:when test="${ not empty sessionScope.User}">
+                <font color="red">Hello ${sessionScope.User.fullName} </font> </br>
+                <a href="SignOutController">SignOut</a>
+                <c:url value="UserInfo" var="viewUserInfoUrl">
+                    <c:param name="btAction" value="User Info"></c:param>
+                </c:url>
+                <form action="${Config.SHOPPING_PAGE}">
+                    <input type="submit" name="btAction" value="User Info"/>
+                </form>
+            </c:when>
+            <c:otherwise>
+                <a href="${Config.LOGIN_PAGE}">Login here</a> 
+            </c:otherwise>
+        </c:choose>
+
+
         <c:set var="selectedCategory" value="${param.cboCategory}"/>
         <c:set var="categories" value="${requestScope.SHOPPING_CATEGORY}"/>
         <c:set var="products" value="${requestScope.SHOPPING_PRODUCT}"/>
@@ -35,8 +47,7 @@
             <c:set var="selectedCategory" value="${categories[0].title}"/>
         </c:if>
 
-        <form action="dispatchercontroller">
-            <input type ="hidden" name="btAction" value="ShoppingOnline">
+        <form action="${Config.SHOPPING_PAGE}">
             <select name="cboCategory" id="categoryList" onchange="this.form.submit()">
                 <option>${selectedCategory}</option>
                 <c:forEach items="${categories}" var="categoryItem" varStatus="status">
@@ -59,7 +70,7 @@
                 <c:forEach items="${products}" var="productItem" varStatus="status">
                     <c:if test="${productItem.categoryTitle eq selectedCategory}">
                         <tr>
-                    <form action="dispatchercontroller">
+                    <form action="${Config.SHOPPING_PAGE}">
                         <td>
                             ${productItem.name}
                         </td>
@@ -86,27 +97,8 @@
         </c:forEach>
     </tbody>
 </table>
-<form action="dispatchercontroller">
+<form action="${Config.SHOPPING_PAGE}">
     <input type="submit" value="View your cart" name="btAction"/>
 </form>
-<!--<script>
-    var txtQuantity
-    var submitForm
-    window.onload = function () {
-        txtQuantity = document.getElementById("txtQuantity")
-        submitForm = document.getElementById("submitForm")
-    }
-    function btnAddItemToCartClicked(event) {
-        const error = document.getElementById("error")
-        if (isNaN(txtQuantity.value)) {
-            event.preventDefault();
-            error.innerHTML = "LOL !! Invalid quantity"
-        } else {
-            error.innerHTML = null
-            var input = document.createElement("input");
-            submitForm.submit()
-        }
-    }
-</script>-->
 </body>
 </html>
