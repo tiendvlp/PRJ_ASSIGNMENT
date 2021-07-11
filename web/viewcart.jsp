@@ -18,53 +18,62 @@
         <title>Online Shopping</title>
     </head>
     <body>
-        <h1>Your cart:</h1>
         <c:set var="cart" value="${CART}"></c:set>
-            <c:choose>
-                <c:when test="${ not empty cart and not empty cart.getAll() and fn:length(cart.getAll()) > 0}">
-                    <c:set var="items" value = "${cart.getAll()}"></c:set>
-                        <form action="${Config.VIEW_CART_PAGE}">
-                            Email: ${User.email} <br>
-                        <input name="txtUserEmail" type="text" value="${User.getEmail()}"/>
-                        Phone number: <input name="txtUserPhoneNumber" type="text" value="${User.getPhoneNumber()}"/>  <font color="red">${UERROR.phoneEmpty}, ${UERROR.phoneInvalid}</font></br>
-                        Address:  <input name="txtUserAddress"  type="text" style="width: 400px" value="${User.address}"/>  <font color="red">${UERROR.addressEmpty}</font></br>
-                        Fullname: <input name="txtUserFullName" type="text" value="${User.fullName}"/> <font color="red">${UERROR.fullNameEmpty}</font></br>
-                        <table border="1">
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Name</th>
-                                    <th>Quantity</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <c:forEach var="cartItem" items="${items}" varStatus="count">
-                                <tr>
-                                    <td>${count.count}</td>
-                                    <td>${cartItem.value.getProductName()}</td>
-                                    <td>${cartItem.value.getQuantity()}</td>
-                                    <td>
-                                        <input type="checkbox" name="chkItem" value="${cartItem.key}" />
-                                    </td>
-                                </tr>
-                            </c:forEach>
+        <c:choose>
+            <c:when test="${ not empty cart and not empty cart.getAll() and fn:length(cart.getAll()) > 0}">
+                <c:set var="items" value = "${cart.getAll()}"></c:set>
+                    <h3>Your Info</h3>
+                    <form action="${Config.VIEW_CART_PAGE}">
+                    Email: </br>
+                    <input name="txtUserEmail" type="text" value="${User.getEmail()}"/> <font color="red">${UERROR.emailEmpty}</font></br>
+                    Phone number: </br><input name="txtUserPhoneNumber" type="text" value="${User.getPhoneNumber()}"/>  <font color="red">${UERROR.phoneEmpty}, ${UERROR.phoneInvalid}</font></br>
+                    Address:  </br><input name="txtUserAddress"  type="text" style="width: 400px" value="${User.address}"/>  <font color="red">${UERROR.addressEmpty}</font></br>
+                    Fullname: </br><input name="txtUserFullName" type="text" value="${User.fullName}"/> <font color="red">${UERROR.fullNameEmpty}</font></br>
+                    <h2>Order detail</h2>
+                    <table border="1">
+                        <thead>
                             <tr>
-                                <td colspan="3">
-                                    <a href="${Config.SHOPPING_PAGE}">Shopping More</a>
-                                </td>
+                                <th>No.</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <c:set var="totalPrice" value="${0}"></c:set>
+                        <c:forEach var="cartItem" items="${items}" varStatus="count">
+                            <tr>
+                                <c:set var="totalPrice" value="${totalPrice + cartItem.value.getPrice() * cartItem.value.getQuantity()}"></c:set>
+                                <td>${count.count}</td>
+                                <td>${cartItem.value.getProductName()}</td>
+                                <td>${cartItem.value.getPrice()}$</td>
+                                <td>${cartItem.value.getQuantity()}</td>
+                                <td>${cartItem.value.getPrice() * cartItem.value.getQuantity()}$</td>
                                 <td>
-                                    <input type="submit" value="Remove Selected Items" name="btAction" />
+                                    <input type="checkbox" name="chkItem" value="${cartItem.key}" />
                                 </td>
                             </tr>
-                            </tbody>
-                        </table>
-                        <input type="submit" value="Checkout" name="btAction" />
-                    </form>    
-                </c:when>
-                <c:otherwise>
-                    <h2>No cart</h2> 
-                    <a href="${Config.SHOPPING_PAGE}">Shopping More</a>
-                </c:otherwise>
-            </c:choose>
+                        </c:forEach>
+                        <tr>
+                            <td colspan="5">
+                                Total: ${totalPrice}$
+                            </td>
+                            <td>
+                                <input type="submit" value="Remove Selected Items" name="btAction" />
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <input type="submit" value="Checkout" name="btAction" />
+                </form>    
+                or </br>
+                <a href="${Config.SHOPPING_PAGE}"><button>Shopping More</button></a>
+                    </c:when>
+                    <c:otherwise>
+                <h2>No cart</h2> 
+                <a href="${Config.SHOPPING_PAGE}">Shopping More</a>
+            </c:otherwise>
+        </c:choose>
     </body>
 </html>

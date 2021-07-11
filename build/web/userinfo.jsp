@@ -54,15 +54,15 @@
             <input type="submit" name="btAction" value="Update">     
             <input type="hidden" name="txtRawUserEmail" value="${User.email}">
             <input type="hidden" name="txtSignInMethod" value="${User.signInMethod}"/>
+            <input type="submit" name="btAction" value="Reset">     
         </form>
         <c:choose>
             <c:when test="${sessionScope.User.getRole() eq 'ADMIN'}">
-                <a href="Search?btAction=Search&txtSearch=${LAST_SEARCH_VALUE}"><button>back</button></a>
+                <a href="${Config.SEARCH_PAGE}?btAction=Search&txtSearch=${LAST_SEARCH_VALUE}"><button>back</button></a>
             </c:when>
             <c:otherwise>
                 <a href="processrequestservlet"><button>back</button></a>
             </c:otherwise>
         </c:choose>
-        <a href="${Config.USER_INFO_PAGE}">Reset</a>
     </body>
 </html>

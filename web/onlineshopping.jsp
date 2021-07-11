@@ -25,8 +25,8 @@
         <c:choose>
             <c:when test="${ not empty sessionScope.User}">
                 <font color="red">Hello ${sessionScope.User.fullName} </font> </br>
-                <a href="SignOutController">SignOut</a>
-                <c:url value="UserInfo" var="viewUserInfoUrl">
+                <a href="${Config.SIGNOUT_CONTROLLER}">SignOut</a>
+                <c:url value="${Config.USER_INFO_PAGE}" var="viewUserInfoUrl">
                     <c:param name="btAction" value="User Info"></c:param>
                 </c:url>
                 <form action="${Config.SHOPPING_PAGE}">
@@ -37,7 +37,6 @@
                 <a href="${Config.LOGIN_PAGE}">Login here</a> 
             </c:otherwise>
         </c:choose>
-
 
         <c:set var="selectedCategory" value="${param.cboCategory}"/>
         <c:set var="categories" value="${requestScope.SHOPPING_CATEGORY}"/>

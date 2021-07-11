@@ -14,13 +14,15 @@
         <title>Registration</title>
     </head>
     <body>
-        <h1>Register</h1>
         <c:set var="USER" value="${User}"></c:set>
+            <h1>Register<c:if test="${USER.signInMethod eq 'GOOGLE_SIGNIN'}"> with Google</c:if></h1>
         <form action="${Config.CREATE_ACCOUNT_CONTROLLER}" id="registerForm">
             <c:choose>
                 <c:when test="${USER.signInMethod eq 'GOOGLE_SIGNIN'}">
-                    ${USER.email}
+                    <font color="grey">Fill missing information</font></br>
+                    Email: ${USER.email}</br>
                     <input name="txtUserEmail" type="hidden" value="${USER.email}"/>
+                    </br>
                     <font color="red"> ${UERROR.getEmailErrorMessage()} </font> 
                     <input type="hidden" name="txtSignInMethod" value="GOOGLE_SIGNIN"/>
                 </c:when>   

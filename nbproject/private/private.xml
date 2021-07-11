@@ -4,33 +4,48 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/web/search.jsp</file>
-            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/admin_search/SearchServlet.java</file>
             <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/common/Config.java</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/shopping/AddItemToCartServlet.java</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/search/SearchDispatcher.java</file>
             <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/filter/UpdateUserReqValidationFilter.java</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/register/ConfirmVerifyCodeServlet.java</file>
             <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/web/confirmupdate.jsp</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/common/error/CheckoutError.java</file>
             <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/common/error/errorvalidator/UpdateReqHandler.java</file>
-            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/common/sessionmodel/UserSessionModel.java</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/search/SearchLastnameServlet.java</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/web/checkoutsuccess.jsp</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/common/error/AddToCartError.java</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/common/error/LoginError.java</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/data/dao/ProductDao.java</file>
             <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/userinfo/UserInfoDispatcher.java</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/sendmail/Email.java</file>
             <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/cart/RemoveItemFromCartServlet.java</file>
             <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/web/WEB-INF/web.xml</file>
-            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/web/login.html</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/data/dto/OrderDetailDto.java</file>
             <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/web/META-INF/context.xml</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/register/CreateAccountServlet.java</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/sendmail/ConfirmAccountEmail.java</file>
             <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/web/verifymail.jsp</file>
-            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/verifiedaccount/SendVerifyCodeServlet.java</file>
             <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/SignOutServlet.java</file>
             <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/userinfo/UpdateUserServlet.java</file>
-            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/verifiedaccount/ConfirmVerifyCodeServlet.java</file>
-            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/shoppingonline/AddItemToCartServlet.java</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/web/login.jsp</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/shopping/LoadShoppingProductServlet.java</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/search/DeleteUserServlet.java</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/login/LoginGoogleServlet.java</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/login/LoginServlet.java</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/sendmail/CheckoutEmail.java</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/data/dao/UserDao.java</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/sendmail/MailSenderApi.java</file>
             <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/cart/CartDispatcher.java</file>
             <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/web/userinfo.jsp</file>
             <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/web/onlineshopping.jsp</file>
-            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/shoppingonline/OnlineShoppingServlet.java</file>
             <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/cart/CheckoutServlet.java</file>
-            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/ProcessRequestServlet.java</file>
             <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/web/WEB-INF/roadmap.json</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/data/dao/OrderDao.java</file>
             <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/web/viewcart.jsp</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/register/SendVerifyCodeServlet.java</file>
             <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/filter/DispatchFilter.java</file>
-            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/common/sessionmodel/SelectedUserSessionModel.java</file>
+            <file>file:/Users/dangminhtien/Desktop/PRJ/PRJ_ASSIGNMENT/PRJ_ASSIGNMENT/src/java/servlet/shopping/ShoppingDispatcher.java</file>
         </group>
     </open-files>
 </project-private>

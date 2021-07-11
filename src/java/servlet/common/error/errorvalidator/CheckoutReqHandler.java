@@ -28,20 +28,25 @@ public class CheckoutReqHandler implements RequestValidator {
         txtFullName = req.getParameter("txtUserFullName");
         txtAddress = req.getParameter("txtUserAddress");
         txtPhoneNumber = req.getParameter("txtUserPhoneNumber");
-
-        if (txtFullName.trim().isEmpty()) {
+        
+        if (txtEmail == null || txtEmail.trim().isEmpty()) {
+            hasError = true;
+            error.setEmailEmpty();
+        }
+        
+        if (txtFullName == null || txtFullName.trim().isEmpty()) {
             hasError = true;
             error.setFullNameEmpty();
         }
-        if (txtAddress.trim().isEmpty()) {
+        if (txtAddress == null || txtAddress.trim().isEmpty()) {
             hasError = true;
             error.setAddressEmpty();
         }
 
-        if (txtPhoneNumber.trim().isEmpty()) {
+        if (txtPhoneNumber == null || txtPhoneNumber.trim().isEmpty()) {
             hasError = true;
             error.setPhoneEmpty();
-        } else if (!ValidatorUtils.validatePhoneNumber(txtPhoneNumber)) {
+        } else if (txtPhoneNumber == null || !ValidatorUtils.validatePhoneNumber(txtPhoneNumber)) {
             hasError = true;
             error.setPhoneInvalid();
         }

@@ -5,8 +5,6 @@
  */
 package common;
 
-import static common.Config.Action.*;
-
 public class Config {
 
     public static final String DB_URL = "jdbc:sqlserver://localhost:1433;"
@@ -60,6 +58,7 @@ public class Config {
         public static final String CONFIRM_VERIFY_CODE_ACTION = "confirm email";
         public static final String SEARCH_ACTION = "Search";
         public static final String LOGIN_ACTION = "Login";
+        public static final String RESET_ACTION = "Reset";
         public static final String REGISTER_ACTION = "Register";
         public static final String CREATE_ACCOUNT_ACTION = "Create account";
         public static final String REMOVE_CART_ITEM_ACTION = "Remove Selected Items";
@@ -75,62 +74,4 @@ public class Config {
         public static final String SHOPPING_ACTION = "Shopping Online";
         public static final String VIEW_USER_INFO_ACTION = "viewuserinfo";
     }
-
-//    public static String getRegisterUrl() {
-//        return DISPATCH_CONTROLLER + "?btAction=" + REGISTER_ACTION;
-//    }
-//
-//    public static String getShoppingOnlineUrl() {
-//        return DISPATCH_CONTROLLER + "?btAction=" + SHOPPING_ACTION;
-//    }
-//
-//    public static String getCheckoutUrl() {
-//        return DISPATCH_CONTROLLER
-//                + "?btAction=" + CHECKOUT_ACTION;
-//    }
-//
-//    public static String getViewCartUrl() {
-//        return DISPATCH_CONTROLLER
-//                + "?btAction=" + VIEW_CART_ACTION;
-//    }
-//
-//    public static String getVerifiedMailPageUrl() {
-//        return DISPATCH_CONTROLLER
-//                + "?btAction=" + VERIFY_MAIL_ACTION;
-//    }
-//
-//    public static String getFullSearchUrl(String searchValue) {
-//        String url = DISPATCH_CONTROLLER
-//                + "?btAction=" + SEARCH_ACTION;
-//        if (!searchValue.trim().isEmpty()) {
-//            url += "&txtSearch=" + searchValue;
-//        }
-//        return url;
-//
-//    }
-//
-//    public static String getLoginUrl(String userEmail, String userPassword) {
-//        return DISPATCH_CONTROLLER
-//                + "?btAction=" + LOGIN_ACTION
-//                + "&txtUserId=" + userEmail
-//                + "&txtPassword=" + userPassword;
-//    }
-//
-//    public static String getFullDeleteUrl(String userEmail, String lastSearchValue) {
-//        return DISPATCH_CONTROLLER
-//                + "?btAction=" + DELETE_ACTION
-//                + "&txtLastSearchValue=" + lastSearchValue
-//                + "&txtUserEmail=" + userEmail;
-//    }
-//
-//    public static String getUserInfoUrl() {
-//        return DISPATCH_CONTROLLER
-//                + "?btAction=" + VIEW_USER_INFO_ACTION;
-//    }
-//
-//    public static String getSignOutUrl() {
-//        return DISPATCH_CONTROLLER
-//                + "?btAction=" + SIGNOUT_ACTION;
-//
-//    }
 }

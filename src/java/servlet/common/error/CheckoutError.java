@@ -10,6 +10,8 @@ package servlet.common.error;
  * @author dangminhtien
  */
 public class CheckoutError implements PresentableError {
+
+    private String emailEmpty = null;
     private String fullNameEmpty = null;
     private String addressEmpty = null;
     private String phoneEmpty = null;
@@ -17,6 +19,14 @@ public class CheckoutError implements PresentableError {
 
     public String getFullNameEmpty() {
         return fullNameEmpty;
+    }
+
+    public String getEmailEmpty() {
+        return emailEmpty;
+    }
+
+    public void setEmailEmpty() {
+        this.emailEmpty = "Email can not be empty";
     }
 
     public String getAddressEmpty() {
@@ -38,10 +48,11 @@ public class CheckoutError implements PresentableError {
     public void setPhoneInvalid() {
         this.phoneInvalid = "Invalid phone number";
     }
+
     public String getPhoneInvalid() {
         return phoneInvalid;
     }
-    
+
     public void setPhoneEmpty() {
         this.phoneEmpty = "Phone can not be empty";
     }

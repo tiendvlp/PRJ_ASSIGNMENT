@@ -179,8 +179,37 @@ public class UserDao {
     }
 
     public UserDto updateUser(String userEmail, UserDto updateValue) throws ClassNotFoundException, SQLException {
-        deleteUser(userEmail);
-        return createUser(updateValue);
+        int effectedRow = 0;
+        String roleId = "2";
+        if (updateValue.getRole().equalsIgnoreCase("ADMIN")) {
+            roleId = "1";
+        }
+        int verified = 0;
+        if (updateValue.isIsVerified()) {
+            verified = 1;
+        }
+        try (Connection con = DbHelper.connect()) {
+            PreparedStatement updateStatement = con.prepareStatement("UPDATE USERS "
+                    + "SET ISVERIFIED = ?, "
+                    + "SIGNINMETHOD = ?, "
+                    + "FULLNAME = ?, "
+                    + "PASSWORD = ?, "
+                    + "PHONENUMBER = ?, "
+                    + "ADDRESS = ?, "
+                    + "ROLEID = ? "
+                    + "WHERE EMAIL = ?");
+            updateStatement.setInt(1, verified);
+            updateStatement.setString(2, updateValue.getSignInMethod());
+            updateStatement.setString(3, updateValue.getFullName());
+            updateStatement.setString(4, updateValue.getPassword());
+            updateStatement.setString(5, updateValue.getPhoneNumber());
+            updateStatement.setString(6, updateValue.getAddress());
+            updateStatement.setString(7, roleId);
+            updateStatement.setString(8, userEmail);
+            effectedRow = updateStatement.executeUpdate();
+        }
+        if (effectedRow <= 0) return null;
+        return updateValue;
     }
 
     public boolean updateRole(String id, boolean isRole) throws ClassNotFoundException, SQLException {

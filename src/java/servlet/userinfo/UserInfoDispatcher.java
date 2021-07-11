@@ -5,8 +5,10 @@
  */
 package servlet.userinfo;
 
+import static common.Config.Action.RESET_ACTION;
 import static common.Config.Action.UPDATE_ACTION;
 import static common.Config.UPDATE_CONTROLLER;
+import static common.Config.USER_INFO_PAGE;
 import static common.Config.USER_INFO_UI;
 import common.ResouceDynamicMapping;
 import java.io.IOException;
@@ -65,6 +67,15 @@ public class UserInfoDispatcher extends HttpServlet {
                     session.setAttribute(SelectedUserSessionModel.SESSION_KEY, sessionModel);
                     url = UPDATE_CONTROLLER;
                     resp.sendRedirect(url);
+                    break;
+                }
+                case RESET_ACTION: {
+                    SelectedUserSessionModel sessionModel
+                            = (SelectedUserSessionModel) session.getAttribute(SelectedUserSessionModel.SESSION_KEY);
+                    sessionModel.setEditedValue(null);
+                    // reset page
+                    resp.sendRedirect(USER_INFO_PAGE);
+                    break;
                 }
             }
         }
